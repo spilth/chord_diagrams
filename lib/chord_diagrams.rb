@@ -43,7 +43,7 @@ module ChordDiagrams
     def draw_chord_diagram(fingerings, svg)
       fingerings = fingerings.split('')
 
-      lowest_fret = fingerings.min
+      lowest_fret = fingerings.reject{ |fret| fret.to_i < 1 }.min
 
       if lowest_fret.to_i > 2
         svg.text lowest_fret, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: { font_size: 20 }
@@ -113,7 +113,7 @@ module ChordDiagrams
 
     def shift_fingerings(fingerings, lowest_fret)
       fingerings.map do |fingering|
-        if fingering != 'x'
+        if fingering != 'x' && fingering != '0'
           fingering.to_i - lowest_fret.to_i + 1
         else
           fingering

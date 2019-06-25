@@ -6,7 +6,7 @@ module ChordDiagrams
       'Bb': 'x13331',
       'C': 'x32010',
       'C#': 'x46664',
-      'D': 'x00232',
+      'D': 'xx0232',
       'D#': 'x68886',
       'E': '022100',
       'Eb': 'x68886',
@@ -21,6 +21,7 @@ module ChordDiagrams
       'D#5': 'x688xx',
 
       # Six Chords
+      'C6': 'x32210',
       'D6': 'xx0202',
       'E6': '022120',
       'G6': '320000',
@@ -43,6 +44,10 @@ module ChordDiagrams
       'DM7': 'xx0222',
       'EM7': 'xx2444',
       'FM7': '132211',
+
+      # Major 9th Chords
+      'Cadd9': 'x32033',
+      'Fadd9': 'xx3213',
 
       # Major Suspended 2nd Chords
       'Dsus2': 'xx0230',
@@ -81,16 +86,16 @@ module ChordDiagrams
       'F#m7': '242222',
       'Gm7': '353333',
 
+      # Minor Ninth Chotds
+      'Am9': "x05557",
+
       # Minor Eleventh Chords
       'Bm11': 'x20220',
       'F#m11': '202200',
 
-      # Major 9th Chords
-      'Cadd9': 'x32033',
-
       # Major Chords with Bass Notes
-      'A/C#': '002220',
-      'A/E': '04222x',
+      'A/C#': '042220',
+      'A/E': '00222x',
       'A/F#': '202220',
       'Bb/A': 'x00331',
       'C/B': 'x22010',
