@@ -43,18 +43,12 @@ module ChordDiagrams
     def draw_chord_diagram(fingerings, svg)
       fingerings = fingerings.split('')
 
-      lowest_fret = fingerings.min
+      lowest_fret = fingerings.reject{ |fret| fret.to_i < 1 }.min
 
       if lowest_fret.to_i > 2
-        svg.text lowest_fret, x: 35, y: 96, text_anchor: :end, style: { font_size: 20 }
+        svg.text lowest_fret, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: { font_size: 20 }
 
-        fingerings = fingerings.map do |fingering|
-          if fingering != 'x'
-            fingering.to_i - lowest_fret.to_i + 1
-          else
-            fingering
-          end
-        end
+        fingerings = shift_fingerings(fingerings, lowest_fret)
       else
         draw_nut(svg)
       end
@@ -73,14 +67,14 @@ module ChordDiagrams
     end
 
     def draw_name(name, svg)
-      svg.text name, x: 100, y: 40, text_anchor: :middle, style: {
+      svg.text name, id: 'chordName', x: 100, y: 40, text_anchor: :middle, style: {
         font_size: 36,
         font_weight: :bold
       }
     end
 
     def draw_nut(svg)
-      svg.line x1: 49, y1: 77, x2: 151, y2: 77, style: {
+      svg.line id: 'nut', x1: 49, y1: 77, x2: 151, y2: 77, style: {
         stroke: :black,
         stroke_width: 8
       }
@@ -112,6 +106,18 @@ module ChordDiagrams
     def draw_frets(svg)
       [80, 100, 120, 140, 160].each do |y|
         svg.line x1: 50, y1: y, x2: 150, y2: y, style: LINE_STYLE
+      end
+    end
+
+    private
+
+    def shift_fingerings(fingerings, lowest_fret)
+      fingerings.map do |fingering|
+        if fingering != 'x' && fingering != '0'
+          fingering.to_i - lowest_fret.to_i + 1
+        else
+          fingering
+        end
       end
     end
   end
