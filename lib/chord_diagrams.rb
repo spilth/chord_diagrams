@@ -10,30 +10,94 @@ module ChordDiagrams
   }.freeze
 
   class << self
-    def chord_svg(name, fingerings = nil)
-      svg = Victor::SVG.new template: :html, width: 100, height: 100, viewBox: '0 0 200 200'
+    def ukulele_svg(name, _fingering = nil)
+      svg = Victor::SVG.new template: :html, width: 80, height: 100, viewBox: '0 0 160 200'
 
-      ChordDiagrams.draw_name(name, svg)
-      ChordDiagrams.draw_frets(svg)
-      ChordDiagrams.draw_strings(svg)
+      ChordDiagrams.draw_ukulele_name(name, svg)
+      ChordDiagrams.draw_ukulele_frets(svg)
+      ChordDiagrams.draw_ukulele_strings(svg)
 
-      if fingerings.nil?
-        fingerings = ChordDiagrams::FINGERINGS[name.to_sym]
-      end
+      fingering = ChordDiagrams::UKULELE_FINGERINGS[name] if fingering.nil?
 
-      if !fingerings.nil?
-        ChordDiagrams.draw_chord_diagram(fingerings, svg)
+      if !fingering.nil?
+        ChordDiagrams.draw_chord_diagram(fingering, svg)
       else
-        ChordDiagrams.draw_missing_chord_diagram(svg)
+        ChordDiagrams.draw_ukulele_missing_chord_diagram(name, svg)
       end
 
       svg.render
     end
 
-    def draw_missing_chord_diagram(svg)
-      puts "Could't find fingerings for the chord '#{name}'"
+    def guitar_svg(name, fingering = nil)
+      svg = Victor::SVG.new template: :html, width: 100, height: 100, viewBox: '0 0 200 200'
+
+      ChordDiagrams.draw_guitar_name(name, svg)
+      ChordDiagrams.draw_guitar_frets(svg)
+      ChordDiagrams.draw_guitar_strings(svg)
+
+      fingering = ChordDiagrams::GUITAR_FINGERINGS[name] if fingering.nil?
+
+      if !fingering.nil?
+        ChordDiagrams.draw_chord_diagram(fingering, svg)
+      else
+        ChordDiagrams.draw_guitar_missing_chord_diagram(name, svg)
+      end
+
+      svg.render
+    end
+
+    def draw_ukulele_name(name, svg)
+      svg.text name, id: 'chordName', x: 80, y: 40, text_anchor: :middle, style: {
+        font_size: 36,
+        font_weight: :bold
+      }
+    end
+
+    def draw_guitar_name(name, svg)
+      svg.text name, id: 'chordName', x: 100, y: 40, text_anchor: :middle, style: {
+        font_size: 36,
+        font_weight: :bold
+      }
+    end
+
+    def draw_guitar_frets(svg)
+      [80, 100, 120, 140, 160].each do |y|
+        svg.line x1: 50, y1: y, x2: 150, y2: y, style: LINE_STYLE
+      end
+    end
+
+    def draw_ukulele_frets(svg)
+      [80, 100, 120, 140, 160].each do |y|
+        svg.line x1: 50, y1: y, x2: 110, y2: y, style: LINE_STYLE
+      end
+    end
+
+    def draw_guitar_strings(svg)
+      [50, 70, 90, 110, 130, 150].each do |x|
+        svg.line x1: x, y1: 80, x2: x, y2: 160, style: LINE_STYLE
+      end
+    end
+
+    def draw_ukulele_strings(svg)
+      [50, 70, 90, 110].each do |x|
+        svg.line x1: x, y1: 80, x2: x, y2: 160, style: LINE_STYLE
+      end
+    end
+
+    def draw_guitar_missing_chord_diagram(name, svg)
+      puts "Could't find fingerings for the Guitar chord '#{name}'"
 
       svg.text '?', x: 102, y: 155, text_anchor: :middle, style: {
+        font_size: 96,
+        font_weight: :bold,
+        fill: :gray
+      }
+    end
+
+    def draw_ukulele_missing_chord_diagram(name, svg)
+      puts "Could't find fingerings for the Ukulele chord '#{name}'"
+
+      svg.text '?', x: 81, y: 155, text_anchor: :middle, style: {
         font_size: 96,
         font_weight: :bold,
         fill: :gray
@@ -43,14 +107,19 @@ module ChordDiagrams
     def draw_chord_diagram(fingerings, svg)
       fingerings = fingerings.split('')
 
-      lowest_fret = fingerings.reject{ |fret| fret.to_i < 1 }.min
+      lowest_fret = fingerings.reject { |fret| fret.to_i < 1 }.min
+      highest_fret = fingerings.reject { |fret| fret.to_i < 1 }.max
 
-      if lowest_fret.to_i > 2
+      if lowest_fret.to_i > 2 && highest_fret.to_i > 3
         svg.text lowest_fret, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: { font_size: 20 }
 
-        fingerings = shift_fingerings(fingerings, lowest_fret)
+        fingerings = shift_guitar_fingerings(fingerings, lowest_fret)
       else
-        draw_nut(svg)
+        if fingerings.size == 6
+          draw_guitar_nut(svg)
+        else
+          draw_ukulele_nut(svg)
+        end
       end
 
       fingerings.each_with_index do |fingering, index|
@@ -66,15 +135,15 @@ module ChordDiagrams
       end
     end
 
-    def draw_name(name, svg)
-      svg.text name, id: 'chordName', x: 100, y: 40, text_anchor: :middle, style: {
-        font_size: 36,
-        font_weight: :bold
+    def draw_guitar_nut(svg)
+      svg.line id: 'nut', x1: 49, y1: 77, x2: 151, y2: 77, style: {
+        stroke: :black,
+        stroke_width: 8
       }
     end
 
-    def draw_nut(svg)
-      svg.line id: 'nut', x1: 49, y1: 77, x2: 151, y2: 77, style: {
+    def draw_ukulele_nut(svg)
+      svg.line id: 'nut', x1: 49, y1: 77, x2: 111, y2: 77, style: {
         stroke: :black,
         stroke_width: 8
       }
@@ -97,21 +166,9 @@ module ChordDiagrams
       svg.line x1: offset - 4, y1: 61 + 4, x2: offset + 4, y2: 61 - 4, style: LINE_STYLE
     end
 
-    def draw_strings(svg)
-      [50, 70, 90, 110, 130, 150].each do |x|
-        svg.line x1: x, y1: 80, x2: x, y2: 160, style: LINE_STYLE
-      end
-    end
-
-    def draw_frets(svg)
-      [80, 100, 120, 140, 160].each do |y|
-        svg.line x1: 50, y1: y, x2: 150, y2: y, style: LINE_STYLE
-      end
-    end
-
     private
 
-    def shift_fingerings(fingerings, lowest_fret)
+    def shift_guitar_fingerings(fingerings, lowest_fret)
       fingerings.map do |fingering|
         if fingering != 'x' && fingering != '0'
           fingering.to_i - lowest_fret.to_i + 1
