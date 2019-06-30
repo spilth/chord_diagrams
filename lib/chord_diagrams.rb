@@ -110,8 +110,8 @@ module ChordDiagrams
       lowest_fret = fingerings.reject { |fret| fret.to_i < 1 }.min
       highest_fret = fingerings.reject { |fret| fret.to_i < 1 }.max
 
-      if lowest_fret.to_i > 2 && highest_fret.to_i > 4
-        svg.text lowest_fret, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: { font_size: 20 }
+      if lowest_fret.to_i > 3 || highest_fret.to_i > 4
+        draw_fret_number(lowest_fret, svg)
 
         fingerings = shift_guitar_fingerings(fingerings, lowest_fret)
       else
@@ -167,6 +167,10 @@ module ChordDiagrams
     end
 
     private
+
+    def draw_fret_number(number, svg)
+      svg.text number, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: {font_size: 24}
+    end
 
     def shift_guitar_fingerings(fingerings, lowest_fret)
       fingerings.map do |fingering|
