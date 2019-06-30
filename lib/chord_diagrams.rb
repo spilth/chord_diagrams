@@ -169,7 +169,7 @@ module ChordDiagrams
     private
 
     def draw_fret_number(number, svg)
-      svg.text number, id: 'fretNumber', x: 35, y: 96, text_anchor: :end, style: {font_size: 24}
+      svg.text number, id: 'fretNumber', x: 37, y: 98, text_anchor: :end, style: {font_size: 24}
     end
 
     def shift_guitar_fingerings(fingerings, lowest_fret)
