@@ -35,7 +35,7 @@ RSpec.describe ChordDiagrams do
 
   context 'when the lowest fingering is below the 3rd fret' do
     it 'draws the nut but no starting fret number' do
-      diagram = ChordDiagrams.chord_svg('A', 'x02220')
+      diagram = ChordDiagrams.guitar_svg('A', 'x02220')
 
       expect(diagram).to have_chord_name('A')
       expect(diagram).to start_on_the_nut
@@ -44,7 +44,7 @@ RSpec.describe ChordDiagrams do
 
   context 'when the lowest fingering is the 3rd fret or higher' do
     it 'draws the starting fret number' do
-      diagram = ChordDiagrams.chord_svg('C#m', 'x35543')
+      diagram = ChordDiagrams.guitar_svg('C#m', 'x35543')
 
       expect(diagram).to have_chord_name('C#m')
       expect(diagram).to start_on_fret(3)
