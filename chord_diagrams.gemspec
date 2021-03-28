@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Brian Kelly']
   spec.email         = ['bkelly@carbonfive.com']
 
-  spec.summary       = 'Generate Chord Diagrams for Guitar'
-  spec.description   = 'Generate Chord Diagrams for Guitar'
+  spec.summary       = 'Generate Chord Diagrams for Guitar and Ukulele'
+  spec.description   = 'Generate Chord Diagrams for Guitar and Ukulele'
   spec.homepage      = 'https://github.com/spilth/chord_diagrams'
   spec.license       = 'MIT'
 
