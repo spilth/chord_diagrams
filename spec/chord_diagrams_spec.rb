@@ -22,14 +22,14 @@ RSpec.describe ChordDiagrams do
     end
 
     def fret_number(xml)
-      xml.xpath("svg/text[@id='fretNumber']").text.delete!("\n")
+      xml.xpath("svg/text[@id='fretNumber']").text.strip!
     end
   end
 
   RSpec::Matchers.define :have_chord_name do |expected|
     match do |actual|
       xml = Nokogiri::XML(actual)
-      xml.xpath("svg/text[@id='chordName']").text.delete!("\n") == expected
+      xml.xpath("svg/text[@id='chordName']").text.strip! == expected
     end
   end
 

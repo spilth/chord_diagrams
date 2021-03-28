@@ -11,7 +11,7 @@ module ChordDiagrams
 
   class << self
     def ukulele_svg(name, _fingering = nil)
-      svg = Victor::SVG.new template: :html, width: 80, height: 100, viewBox: '0 0 160 200'
+      svg = Victor::SVG.new template: :minimal, width: 80, height: 100, viewBox: '0 0 160 200'
 
       ChordDiagrams.draw_ukulele_name(name, svg)
       ChordDiagrams.draw_ukulele_frets(svg)
@@ -29,7 +29,7 @@ module ChordDiagrams
     end
 
     def guitar_svg(name, fingering = nil)
-      svg = Victor::SVG.new template: :html, width: 100, height: 100, viewBox: '0 0 200 200'
+      svg = Victor::SVG.new template: :minimal, width: 100, height: 100, viewBox: '0 0 200 200'
 
       ChordDiagrams.draw_guitar_name(name, svg)
       ChordDiagrams.draw_guitar_frets(svg)
