@@ -1,4 +1,4 @@
-# ChordDiagrams
+# ChordDiagrams [![Build Status](https://www.travis-ci.com/spilth/chord_diagrams.svg?branch=master)](https://www.travis-ci.com/spilth/chord_diagrams)
 
 Generate SVGs for Guitar and Ukulele Chord Diagrams
 
