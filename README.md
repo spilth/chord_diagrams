@@ -12,11 +12,15 @@ gem 'chord_diagrams'
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install chord_diagrams
+```bash
+$ gem install chord_diagrams
+```
 
 ## Usage
 
@@ -25,14 +29,6 @@ require 'chord_diagrams'
 puts ChordDiagrams.guitar_svg('Am')
 puts ChordDiagrams.ukulele_svg('Am')
 ```
-
-### Guitar
-
-<svg width="100" height="100" viewBox="0 0 200 200"><text x="100" y="40" text-anchor="middle" style="font-size:36; font-weight:bold">Am</text><line x1="50" y1="80" x2="150" y2="80" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="100" x2="150" y2="100" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="120" x2="150" y2="120" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="140" x2="150" y2="140" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="160" x2="150" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="80" x2="50" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="70" y1="80" x2="70" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="90" y1="80" x2="90" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="110" y1="80" x2="110" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="130" y1="80" x2="130" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="150" y1="80" x2="150" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="49" y1="77" x2="151" y2="77" style="stroke:black; stroke-width:8"/><circle cx="50" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/><circle cx="70" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/><circle cx="90" cy="110" r="8" style="fill:black"/><circle cx="110" cy="110" r="8" style="fill:black"/><circle cx="130" cy="90" r="8" style="fill:black"/><circle cx="150" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/></svg>
-
-### Ukulele
-
-<svg width="80" height="100" viewBox="0 0 160 200"><text id="chordName" x="80" y="40" text-anchor="middle" style="font-size:36; font-weight:bold">Am</text><line x1="50" y1="80" x2="110" y2="80" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="100" x2="110" y2="100" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="120" x2="110" y2="120" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="140" x2="110" y2="140" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="160" x2="110" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="50" y1="80" x2="50" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="70" y1="80" x2="70" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="90" y1="80" x2="90" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line x1="110" y1="80" x2="110" y2="160" style="stroke:black; stroke-width:2; stroke-linecap:square"/><line id="nut" x1="49" y1="77" x2="111" y2="77" style="stroke:black; stroke-width:8"/><circle cx="50" cy="90" r="8" style="fill:black"/><circle cx="70" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/><circle cx="90" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/><circle cx="110" cy="61" r="6" style="stroke:black; fill:white; stroke-width:2"/></svg>
 
 ## Development
 
