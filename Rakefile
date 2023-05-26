@@ -16,7 +16,7 @@ task :guitar do
     html << ChordDiagrams.guitar_svg(name)
   end
 
-  File.open("guitar.html", "w") { |file| file.write(html) }
+  File.write("guitar.html", html)
 end
 
 task :ukulele do
@@ -26,5 +26,5 @@ task :ukulele do
     html << ChordDiagrams.ukulele_svg(name)
   end
 
-  File.open("ukulele.html", "w") { |file| file.write(html) }
+  File.write("ukulele.html", html)
 end
