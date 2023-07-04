@@ -7,8 +7,10 @@ RSpec::Core::RakeTask.new(:spec)
 
 task default: [:spec, :standard]
 
+desc "Generate all diagrams"
 task sheets: %i[guitar ukulele]
 
+desc "Generate guitar diagrams"
 task :guitar do
   html = ""
 
@@ -19,6 +21,7 @@ task :guitar do
   File.write("guitar.html", html)
 end
 
+desc "Generate ukulele diagrams"
 task :ukulele do
   html = ""
 
