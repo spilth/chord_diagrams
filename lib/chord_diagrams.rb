@@ -131,6 +131,21 @@ module ChordDiagrams
           draw_fingered_string(fingering, offset, svg)
         end
       end
+
+      unless fingerings.include?("0")
+        first_string_index = (fingerings[0] != "x") ? 0 : 1
+        last_string_index = (fingerings[fingerings.size - 1] != "x") ? fingerings.size - 1 : fingerings.size - 2
+
+        if fingerings[first_string_index] != "x" &&
+          fingerings[first_string_index] == fingerings[last_string_index] &&
+          fingerings.all? { |f| f == "x" || fingerings[first_string_index].to_i <= f.to_i }
+          svg.line x1: 50 + (20 * first_string_index),
+                   y1: 70 + (fingerings[first_string_index].to_i * 20),
+                   x2: 50 + (20 * last_string_index),
+                   y2: 70 + (fingerings[last_string_index].to_i * 20),
+                   style: { stroke: :black, stroke_width: 14 }
+        end
+      end
     end
 
     def draw_guitar_nut(svg)
@@ -148,7 +163,7 @@ module ChordDiagrams
     end
 
     def draw_fingered_string(fingering, offset, svg)
-      svg.circle cx: offset, cy: 70 + (fingering.to_i * 20), r: 8, style: {
+      svg.circle cx: offset, cy: 70 + (fingering.to_i * 20), r: 7, style: {
         fill: :black
       }
     end
@@ -167,7 +182,7 @@ module ChordDiagrams
     private
 
     def draw_fret_number(number, svg)
-      svg.text number, id: "fretNumber", x: 37, y: 98, text_anchor: :end, style: {font_size: 24}
+      svg.text number, id: "fretNumber", x: 37, y: 98, text_anchor: :end, style: { font_size: 24 }
     end
 
     def shift_guitar_fingerings(fingerings, lowest_fret)
