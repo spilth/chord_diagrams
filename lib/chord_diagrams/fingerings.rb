@@ -1,14 +1,13 @@
-require "csv"
-
 module ChordDiagrams
   guitar_fingerings = {}
   ukulele_fingerings = {}
 
   fingerings_file = File.join(__dir__, "fingerings.csv")
 
-  CSV.foreach(fingerings_file, headers: true) do |row|
-    guitar_fingerings[row[0]] = row[1] unless row[1].nil?
-    ukulele_fingerings[row[0]] = row[2] unless row[2].nil?
+  File.readlines(fingerings_file).each do |line|
+    chord, guitar, ukulele = line.chomp.split(",")
+    guitar_fingerings[chord] = guitar unless guitar.nil?
+    ukulele_fingerings[chord] = ukulele unless ukulele.nil?
   end
 
   GUITAR_FINGERINGS = guitar_fingerings.freeze

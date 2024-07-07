@@ -85,7 +85,7 @@ module ChordDiagrams
     end
 
     def draw_guitar_missing_chord_diagram(name, svg)
-      puts "Could't find fingerings for the Guitar chord '#{name}'"
+      puts "Couldn't find fingerings for the Guitar chord '#{name}'"
 
       svg.text "?", x: 102, y: 155, text_anchor: :middle, style: {
         font_size: 96,
